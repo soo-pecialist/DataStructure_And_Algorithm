@@ -10,43 +10,67 @@ def gcd(m,n):
         m, n = n, (m%n)
     return n
 
+# get numerator
+# example: get_num(Fraction(15, 35))    
+def get_num(self):
+    return self.num
+
+# get denominator
+# example: get_den(Fraction(15, 35))    
+def get_den(self):
+    return self.den
+
 class Fraction:
     def __init__(self, top, bottom):
-        self.num = top
-        self.den = bottom
+        assert (type(top) == int) and (type(bottom) == int), \
+        "You MUST use 'integer'"
+        assert bottom != 0, "You are not allowed to set denominator to 0"
+        
+        common = gcd(top, bottom)
+        self.num = top//common
+        self.den = bottom//common
+         
+    def __repr__(self):
+        return 'Fraction {}/{}'.format(self.num, self.den)
     
     def __str__ (self):
-        common = gcd(self.num, self.den)
-        return str(self.num//common) + "/" + str(self.den//common)
+        return str(self.num) + "/" + str(self.den)
     
     def show(self):
-        common = gcd(self.num, self.den)
-        print(str(self.num//common) + "/" + str(self.den//common))    
+        print(str(self.num) + "/" + str(self.den))    
 
 ## Numerical operation
     def __add__(self, other):
         new_num = self.num* other.den + self.den*other.num
         new_den = self.den * other.den
-        common = gcd(new_num, new_den)
-        return Fraction(new_num//common, new_den//common)
-    
+        if new_num == 0:
+            return 0
+        return Fraction(new_num, new_den)
+        
     def __sub__(self, other):
         new_num = self.num*other.den - other.num*self.den
         new_den = self.den * other.den
-        common = gcd(new_num, new_den)
-        return Fraction(new_num//common, new_den//common)
+        if new_num == 0:
+            return 0
+        return Fraction(new_num, new_den)
         
     def __mul__(self, other):
         new_num = self.num * other.num
         new_den = self.den * other.den
-        common = gcd(new_num, new_den)
-        return Fraction(new_num//common, new_den//common)
+        if new_num == 0:
+            return 0
+        return Fraction(new_num, new_den)
 
     def __truediv__(self, other):
         new_num = self.num * other.den
         new_den = self.den * other.num
-        common = gcd(new_num, new_den)
-        return Fraction(new_num//common, new_den//common)
+        if new_num == 0:
+            return 0
+        if abs(new_num) == abs(new_den):
+            return new_num // new_den
+        if new_den == 0:
+            raise AssertionError("You cannot divide by 0")
+        return Fraction(new_num, new_den)
 
 ## Inequality operation
     def __eq__(self, other):
@@ -107,3 +131,9 @@ print("f1 < f2  ? {}".format(f1<f2))
 print("f2 < f3  ? {}".format(f2<f3))
 print("f2 > f3  ? {}".format(f2>f3))
 print("f3 < f1  ? {}".format(f3<f1))
+print()
+print("-1/3 + 1/3 = {}".format(Fraction(-1,3) + Fraction(1,3)))
+print("-1/3 - 1/3 = {}".format(Fraction(-1,3) - Fraction(1,3)))
+print("-1/3 * 1/3 = {}".format(Fraction(1,-3) * Fraction(1,3)))
+print("-1/3 / 1/3 = {}".format(Fraction(1,-3) / Fraction(1,3)))
+
