@@ -3,7 +3,7 @@
 """
 Created on Sat May 26 20:23:38 2018
 
-@author: KimSooHyeon
+@author: Soo Hyeon Kim
 """
 def gcd(m,n):
     while m % n != 0:
@@ -22,6 +22,7 @@ class Fraction:
     def show(self):
         common = gcd(self.num, self.den)
         print(str(self.num//common) + "/" + str(self.den//common))    
+
 ## Numerical operation
     def __add__(self, other):
         new_num = self.num* other.den + self.den*other.num
@@ -92,8 +93,8 @@ f1 = Fraction(1,4)
 f2 = Fraction(2,3)
 f3 = Fraction(15, 35)
 f4 = Fraction(2,8)
+print("[Test]")
 print("f1: {0}, f2: {1}, f3: {2}, f4: {3}\n".format(f1, f2, f3, f4))
-
 print("f1 + f3 = {}".format(f1+f3))
 print("f2 - f4 = {}".format(f2-f4))
 print("f2 * f3 = {}".format(f2*f3))
