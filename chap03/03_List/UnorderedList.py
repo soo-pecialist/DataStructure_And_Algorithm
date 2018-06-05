@@ -5,6 +5,7 @@ Created on Tue Jun  5 00:40:03 2018
 
 @author: Soo Hyeon Kim
 """
+import Node
 
 class UnorderedList:
     def __init__(self):
@@ -38,7 +39,7 @@ class UnorderedList:
         return self.head == None 
     
     def add(self, item):
-        temp = Node(item)
+        temp = Node.Node(item)
         temp.set_next(self.head)
         self.head = temp
     
